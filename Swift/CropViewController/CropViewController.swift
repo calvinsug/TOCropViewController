@@ -385,7 +385,7 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
      Forward status bar status style changes to the crop view controller
      :nodoc:
      */
-    open override var childForStatusBarStyle: UIViewController? {
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
         return toCropViewController
     }
     
@@ -393,7 +393,7 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
      Forward status bar status visibility changes to the crop view controller
      :nodoc:
      */
-    open override var childForStatusBarHidden: UIViewController? {
+    open override var childViewControllerForStatusBarHidden: UIViewController? {
         return toCropViewController
     }
     
@@ -405,13 +405,13 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
         return toCropViewController.preferredStatusBarStyle
     }
     
-    open override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
-        if #available(iOS 11.0, *) {
-            return toCropViewController.preferredScreenEdgesDeferringSystemGestures
-        }
-        
-        return UIRectEdge.all
-    }
+//    open override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+//        if #available(iOS 11.0, *) {
+//            return toCropViewController.preferredScreenEdgesDeferringSystemGestures
+//        }
+//
+//        return UIRectEdge.all
+//    }
     
     ///------------------------------------------------
     /// @name Object Creation
@@ -557,10 +557,10 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
 
 extension CropViewController {
     fileprivate func setUpCropController() {
-        addChild(toCropViewController)
+        addChildViewController(toCropViewController)
         transitioningDelegate = (toCropViewController as! UIViewControllerTransitioningDelegate)
         toCropViewController.delegate = self
-        toCropViewController.didMove(toParent: self)
+        toCropViewController.didMove(toParentViewController: self)
     }
     
     fileprivate func setUpDelegateHandlers() {
